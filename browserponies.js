@@ -1285,6 +1285,7 @@ var BrowserPonies = (function () {
 		this.random_speeches  = [];
 		this.speeches_by_name = {};
 		this.interactions = [];
+		this.parsed_interactions = pony.parsed_interactions || [];
 		this.instances    = [];
 		this.categories   = [];
 
@@ -2814,7 +2815,8 @@ var BrowserPonies = (function () {
 				behaviorgroups: {},
 				behaviors:  [],
 				speeches:   [],
-				categories: []
+				categories: [],
+				parsed_interactions: []
 			};
 			var behaviors_by_name = {};
 			var effects = [];
@@ -2970,6 +2972,10 @@ var BrowserPonies = (function () {
 						pony.categories = pony.categories.concat(row.slice(1));
 						break;
 
+					case "interaction":
+						pony.parsed_interactions.push(this.convertInteraction(row, row[1], pony.name));
+						break;
+
 					default:
 						console.warn(baseurl+": Unknown pony setting:",row);
 				}
@@ -3011,48 +3017,52 @@ var BrowserPonies = (function () {
 
 			return pony;
 		},
-		convertInteractions: function (ini) {
+		convertInteraction: function (row, name, pony) {
+			var activate = "one";
+			if (row.length > 4) {
+				activate = row[5].trim().toLowerCase();
+				if (activate === "true" || activate === "all") {
+					activate = "all";
+				}
+				else if (activate == "random" || activate === "any") {
+					activate = "any";
+				}
+				else if (activate === "false" || activate === "one") {
+					activate = "one";
+				}
+				else {
+					throw new Error("illegal target activation value: "+row[5]);
+				}
+			}
+
+			var proximity = row[3].trim().toLowerCase();
+			if (proximity !== "default") proximity = Number(proximity);
+
+			return {
+				name:        name,
+				pony:        pony,
+				probability: Number(row[2]),
+				proximity:   proximity,
+				targets:     row[4],
+				activate:    activate,
+				behaviors:   row[6],
+				delay:       row.length > 7 ? Number(row[7].trim()) : 0
+			};
+		},
+		convertLegacyInteractions: function (ini) {
 			var rows = PonyINI.parse(ini);
 			var interactions = [];
 
 			for (var i = 0, n = rows.length; i < n; ++ i) {
 				var row = rows[i];
-				var activate = "one";
-				if (row.length > 4) {
-					activate = row[5].trim().toLowerCase();
-					if (activate === "true" || activate === "all") {
-						activate = "all";
-					}
-					else if (activate == "random" || activate === "any") {
-						activate = "any";
-					}
-					else if (activate === "false" || activate === "one") {
-						activate = "one";
-					}
-					else {
-						throw new Error("illegal target activation value: "+row[5]);
-					}
-				}
-
-				var proximity = row[3].trim().toLowerCase();
-				if (proximity !== "default") proximity = Number(proximity);
-				interactions.push({
-					name:        row[0],
-					pony:        row[1],
-					probability: Number(row[2]),
-					proximity:   proximity,
-					targets:     row[4],
-					activate:    activate,
-					behaviors:   row[6],
-					delay:       row.length > 7 ? Number(row[7].trim()) : 0
-				});
+				interactions.push(this.convertInteraction(row, row[0], row[1]));
 			}
 
 			return interactions;
 		},
-		addInteractions: function (interactions) {
+		addLegacyInteractions: function (interactions) {
 			if (typeof(interactions) === "string") {
-				interactions = this.convertInteractions(interactions);
+				interactions = this.convertLegacyInteractions(interactions);
 			}
 			for (var i = 0, n = interactions.length; i < n; ++ i) {
 				this.addInteraction(interactions[i]);
@@ -3069,6 +3079,31 @@ var BrowserPonies = (function () {
 		addPonies: function (ponies) {
 			for (var i = 0, n = ponies.length; i < n; ++ i) {
 				this.addPony(ponies[i]);
+			}
+
+			this.loadPonyInteractions();
+		},
+		loadPonyInteractions: function () {
+			// The new pony.ini format allows interactions to be coded directly inside
+			// pony.ini without the use of interactions.ini
+			//
+			// However, there is a catch-22, in order for the interaction to other ponies
+			// work, the other pony needs to be already exist/added
+			//
+			// For example: If Apple Bloom has an interaction with Scootaloo, the
+			// interaction will not be added as Scootaloo doesn't exist in the ponies
+			// array yet
+			//
+			// Quick hack is to just loop the ponies array again after all the ponies
+			// are ready
+			for (var name in ponies) {
+				var pony = ponies[name];
+				if (pony.parsed_interactions && pony.parsed_interactions.length) {
+					for (var i = 0; i < pony.parsed_interactions.length; ++ i) {
+						this.addInteraction(pony.parsed_interactions[i]);
+						delete pony.parsed_interactions[i];
+					}
+				}
 			}
 		},
 		addPony: function (pony) {
@@ -3515,7 +3550,7 @@ var BrowserPonies = (function () {
 				this.addPonies(config.ponies);
 			}
 			if (config.interactions) {
-				this.addInteractions(config.interactions);
+				this.addLegacyInteractions(config.interactions);
 			}
 			if (config.spawn) {
 				for (var name in config.spawn) {
