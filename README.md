@@ -2,13 +2,13 @@ This branch fork of Browser Ponies delivers the latest pony content from [Deskto
 
 This is also the same JavaScript and content fork used for the [Ponyhoof](http://ponyhoof.little.my) browser extension.
 
-== Tweaks ==
+## Tweaks
 
 `browserponies.js` has been slightly modified to support  `interactions` inside `pony.ini` instead of a separate `interactions.ini` file.
 
 Web GUI files and unused scripts are removed from this branch fork as it is not the primary focus, please see the [main repo](https://github.com/panzi/Browser-Ponies) for those.
 
-== How to provision the latest pony content from Desktop Ponies? ==
+## How to provision the latest pony content from Desktop Ponies?
 
 1. Empty/move out the current `ponies` folder.
 
