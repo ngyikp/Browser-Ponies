@@ -208,6 +208,10 @@
     "baseurl": "ponies/coriander%20cumin/"
   },
   {
+    "ini": "Name,Coloratura\nCategories,\"supporting ponies\",mares,\"earth ponies\"\nBehavior,Idle,0.1,15,10,0,idleright.gif,idleleft.gif,None,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0,Fixed\nBehavior,Trot,0.2,15,5,3,trotright.gif,trotleft.gif,All,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0,Fixed\n",
+    "baseurl": "ponies/countess%20coloratura%20%28rara%29/"
+  },
+  {
     "ini": "Name,Cranky\nCategories,stallions,non-ponies,\"supporting ponies\"\nBehavior,stand,0.2,15,5,0,crankydoodle-idle-right.gif,crankydoodle-idle-left.gif,None,,,,False,0,0,,True,,,\"42,46\",\"49,46\",False,0,Fixed\nBehavior,walking,0.35,10,5,1.4,crankydoodle-walk-right.gif,crankydoodle-walk-left.gif,Diagonal_horizontal,,,,False,0,0,,True,,,\"42,46\",\"49,46\",False,0,Fixed\nSpeak,#1,\"Kid, you're smarter than you look.\",,False,0\nSpeak,#2,\"Nopony calls me Doodle!\",,False,0\nSpeak,#3,\"I traveled around Equestria my entire life.\",,False,0\nSpeak,#4,\"I came to Ponyville for some peace and quiet and privacy.\",,False,0\n",
     "baseurl": "ponies/cranky%20doodle%20donkey/"
   },
