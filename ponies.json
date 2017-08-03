@@ -169,7 +169,7 @@
     },
     {
         "baseurl": "ponies/cheerilee%20%2880s%29/",
-        "ini": "Name,\"Cheerilee (80S)\"\nCategories,\"supporting ponies\",\"alternate art\",mares,\"earth ponies\"\nBehavior,stand,0.1,15,10,0,stand_80s_cherilee_right.gif,stand_80s_cherilee_left.gif,MouseOver,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0\nBehavior,fly,0.15,10,5,3,trotcycle_80s_cherilee_right.gif,trotcycle_80s_cherilee_left.gif,Diagonal_Only,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0\nBehavior,walk,0.25,15,5,3,trotcycle_80s_cherilee_right.gif,trotcycle_80s_cherilee_left.gif,Horizontal_Only,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0\nSpeak,\"Unnamed #1\",\"That's like, totally tubular!\",,False,0\nSpeak,\"Unnamed #2\",Radical!,,False,0\n"
+        "ini": "Name,\"Cheerilee (80s)\"\nCategories,\"supporting ponies\",\"alternate art\",mares,\"earth ponies\"\nBehavior,stand,0.1,15,10,0,stand_80s_cherilee_right.gif,stand_80s_cherilee_left.gif,MouseOver,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0\nBehavior,fly,0.15,10,5,3,trotcycle_80s_cherilee_right.gif,trotcycle_80s_cherilee_left.gif,Diagonal_Only,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0\nBehavior,walk,0.25,15,5,3,trotcycle_80s_cherilee_right.gif,trotcycle_80s_cherilee_left.gif,Horizontal_Only,,,,False,0,0,,True,,,\"0,0\",\"0,0\",False,0\nSpeak,\"Unnamed #1\",\"That's like, totally tubular!\",,False,0\nSpeak,\"Unnamed #2\",Radical!,,False,0\n"
     },
     {
         "baseurl": "ponies/cheerilee/",

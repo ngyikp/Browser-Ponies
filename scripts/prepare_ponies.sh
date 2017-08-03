@@ -24,6 +24,8 @@ sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #4"/' "ponies
 sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #5"/' "ponies/changeling (lv2) 5/pony.ini"
 sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #6"/' "ponies/changeling (lv2) 6/pony.ini"
 
+sed -i "" -e 's/Name,"Cheerilee (80S)"/Name,"Cheerilee (80s)"/' "ponies/cheerilee (80s)/pony.ini"
+
 sed -i "" -e 's/Name,"Countess Coloratura (Rara)"/Name,Coloratura/' "ponies/countess coloratura (rara)/pony.ini"
 
 echo 
