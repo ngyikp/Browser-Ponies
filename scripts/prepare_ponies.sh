@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mv Ponies ponies
+
 rm -rf "ponies/.DS_Store"
 rm -rf "ponies/Random Pony"
 mv "ponies/Jesús Pezuña" "ponies/Jesus Pezuna"
@@ -12,6 +14,17 @@ mv "ponies/Changeling (Lv2) #6" "ponies/Changeling (Lv2) 6"
 
 echo Repairing names
 ./scripts/repair_names.py ponies/
+
+echo 
+echo Changing pony names
+sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #1"/' "ponies/changeling (lv2) 1/pony.ini"
+sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #2"/' "ponies/changeling (lv2) 2/pony.ini"
+sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #3"/' "ponies/changeling (lv2) 3/pony.ini"
+sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #4"/' "ponies/changeling (lv2) 4/pony.ini"
+sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #5"/' "ponies/changeling (lv2) 5/pony.ini"
+sed -i "" -e 's/Name,Changeling/Name,"Changeling (Season 6 Finale) #6"/' "ponies/changeling (lv2) 6/pony.ini"
+
+sed -i "" -e 's/Name,"Countess Coloratura (Rara)"/Name,Coloratura/' "ponies/countess coloratura (rara)/pony.ini"
 
 echo 
 echo Converting pony.ini to ponies.json
