@@ -15,7 +15,7 @@ echo Repairing names
 
 echo 
 echo Converting pony.ini to ponies.json
-./scripts/convert.py ponies/*/pony.ini > ponies.json
+./scripts/convert.py ponies/*/pony.ini | python -m json.tool > ponies.json
 
 echo 
 echo Encoding sound files
