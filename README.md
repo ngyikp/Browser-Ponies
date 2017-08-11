@@ -16,8 +16,18 @@ Web GUI files and unused scripts are removed from this branch fork as it is not 
 
 3. Run `bash scripts/prepare_ponies.sh`.
 
-   If you get warnings about missing packages such as `ffmpeg` or `oggenc`, then install them and try again.
-
 4. When the bash script finishes, the ponies are ready to serve! You can get the list of ponies to load into the Browser Ponies JavaScript through the generated `ponies.json` file.
 
    Bonus: Run image optimisers such as Gifsicle to reduce file size. This is easily done on macOS with [ImageOptim](https://imageoptim.com/mac).
+
+### Required dependencies
+
+* Python
+* ffmpeg
+* oggenc
+
+On macOS, these can be easily installed using [Homebrew](https://brew.sh): `brew install ffmpeg vorbis-tools`
+
+You also need these Python dependencies, use `pip install -r scripts/requirements.txt` to install them:
+
+* chardet
