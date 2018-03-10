@@ -36,7 +36,7 @@ def wrap(files,out):
 		dirname, filename = os.path.split(filepath)
 		with open(filepath,'rb') as f:
 			data = IGNORE.sub("", decode(f.read())).replace("\r\n","\n")
-			ponies.append({'ini': data, 'baseurl': urllib.parse.quote(normpath(dirname)+"/")})
+			ponies.append({'baseurl': urllib.parse.quote(normpath(dirname)+"/"), 'ini': data})
 	out.write(json.dumps(ponies).encode("utf-8"))
 	out.write("\n".encode())
 
