@@ -2,7 +2,8 @@
 
 mv Ponies ponies
 
-rm -rf "ponies/.DS_Store"
+find "ponies/" -name ".DS_Store" -depth -exec rm {} \;
+
 rm -rf "ponies/Random Pony"
 mv "ponies/Jesús Pezuña" "ponies/Jesus Pezuna"
 mv "ponies/Changeling (Lv2) #1" "ponies/Changeling (Lv2) 1"
