@@ -5,7 +5,7 @@ import os
 import json
 #import chardet
 import codecs
-import urllib
+import urllib.parse
 
 if os.path.sep != '/':
 	def normpath(path):
@@ -17,7 +17,7 @@ else:
 IGNORE = re.compile("^\\s*(?:'.*)?\r?\n", re.M)
 CODEC  = re.compile("^BOM_(.*?)(?:_(?:BE|LE))?$")
 
-BOMS = list(set(unicode(getattr(codecs, name),CODEC.match(name).group(1))
+BOMS = list(set(str(getattr(codecs, name),CODEC.match(name).group(1))
 	for name in dir(codecs) if name.startswith('BOM_UTF')))
 BOMS.sort(key=lambda bom:-len(bom))
 
@@ -36,10 +36,10 @@ def wrap(files,out):
 		dirname, filename = os.path.split(filepath)
 		with open(filepath,'rb') as f:
 			data = IGNORE.sub("", decode(f.read())).replace("\r\n","\n")
-			ponies.append({'ini': data, 'baseurl': urllib.quote(normpath(dirname)+"/")})
+			ponies.append({'ini': data, 'baseurl': urllib.parse.quote(normpath(dirname)+"/")})
 	out.write(json.dumps(ponies).encode("utf-8"))
-	out.write("\n")
+	out.write("\n".encode())
 
 if __name__ == '__main__':
 	import sys
-	wrap(sys.argv[1:],sys.stdout)
+	wrap(sys.argv[1:],sys.stdout.buffer)

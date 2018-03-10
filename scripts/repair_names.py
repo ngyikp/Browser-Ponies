@@ -16,7 +16,7 @@ def repair_names(path):
 		lower_entry = entry.lower()
 		entry_path = os.path.join(path,entry)
 		if lower_entry != entry:
-			print 'renaming',path,entry,'->',lower_entry
+			print('renaming', path.decode('utf-8'), entry.decode('utf-8'), '->', lower_entry.decode('utf-8'))
 			lower_path = os.path.join(path,lower_entry)
 			os.rename(entry_path, lower_path)
 			entry      = lower_entry
@@ -24,9 +24,9 @@ def repair_names(path):
 
 		if os.path.isdir(entry_path):
 			repair_names(entry_path)
-		elif lower_entry == 'pony.ini':
-			print 'repairing',entry_path
-			m = SPECIAL.match(os.path.basename(os.path.dirname(os.path.abspath(entry_path))))
+		elif lower_entry == b'pony.ini':
+			print('repairing', entry_path.decode('utf-8'))
+			m = SPECIAL.match(os.path.basename(os.path.dirname(os.path.abspath(entry_path))).decode('utf-8'))
 			suffix = m and m.group(1)
 			if suffix:
 				suffix = " " + suffix.title()
@@ -50,9 +50,9 @@ def repair_names(path):
 						name = row.values[1]
 						if not name.endswith(suffix):
 							row.values[1] = name + suffix
-							print 'renamed pony',name,'->',row.values[1]
-				buf.append(unicode(row))
-			s = u'\n'.join(buf)
+							print('renamed pony', name, '->', row.values[1])
+				buf.append(str(row))
+			s = '\n'.join(buf)
 			with open(entry_path,'wb') as f:
 				f.write(s.encode('utf-8'))
 
@@ -65,10 +65,10 @@ def main():
 
 	dirs = args.directories
 	if not dirs:
-		dirs = [u'.']
+		dirs = ['.']
 	encoding = sys.getfilesystemencoding()
 	for directory in dirs:
-		repair_names(unicode(directory,encoding))
+		repair_names(directory.encode(encoding))
 
 if __name__ == '__main__':
 	main()

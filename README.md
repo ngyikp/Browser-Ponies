@@ -22,7 +22,7 @@ Web GUI files and unused scripts are removed from this branch fork as it is not 
 
 ### Required dependencies
 
-* Python
+* Python 3
 * ffmpeg
 * oggenc
 

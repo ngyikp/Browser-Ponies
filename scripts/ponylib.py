@@ -4,7 +4,7 @@ import chardet
 import codecs
 
 CODEC = re.compile("^BOM_(.*?)(?:_(?:BE|LE))?$")
-BOMS = list(set(unicode(getattr(codecs, name),CODEC.match(name).group(1))
+BOMS = list(set(str(getattr(codecs, name),CODEC.match(name).group(1))
 	for name in dir(codecs) if name.startswith('BOM_UTF')))
 BOMS.sort(key=lambda bom:-len(bom))
 
@@ -36,7 +36,7 @@ class Comment(BaseRow):
 		return "'"+self.text
 	
 	def __unicode__(self):
-		return u"'"+self.text
+		return "'"+self.text
 
 def escape(s):
 	if isinstance(s,list):
@@ -59,7 +59,7 @@ class Row(BaseRow):
 		return ','.join(escape(value) for value in self.values)
 	
 	def __unicode__(self):
-		return u','.join(escape(value) for value in self.values)
+		return ','.join(escape(value) for value in self.values)
 	
 	def __getitem__(self,index):
 		if len(self.values) <= index:
@@ -83,7 +83,7 @@ def parse_string(text,comments=True):
 		else:
 			i, row = parse_line(line,i)
 			if i < len(line):
-				print >> sys.stderr, "trailing text:", line[i:]
+				print("trailing text:", line[i:], file=sys.stderr)
 			row = Row(lineno+1,row)
 		rows.append(row)
 	return rows
@@ -121,13 +121,13 @@ def parse_line(line,i):
 					if ch == ',':
 						i += 1
 					elif ch != '}':
-						print >> sys.stderr, 'data after quoted string:',line[i:]
+						print('data after quoted string:',line[i:], file=sys.stderr)
 			else:
-				print >> sys.stderr, 'unterminated quoted string'
+				print('unterminated quoted string', file=sys.stderr)
 
 		elif ch == ',':
 			i += 1
-			row.append(u'')
+			row.append('')
 
 		elif ch == '{':
 			i, nested = parse_line(line,i+1)
@@ -141,10 +141,10 @@ def parse_line(line,i):
 					if ch == ',':
 						i += 1
 					elif ch != '}':
-						print >> sys.stderr, 'data after list:',line[i:]
+						print('data after list:',line[i:], file=sys.stderr)
 
 			else:
-				print >> sys.stderr, 'unterminated list'
+				print('unterminated list', file=sys.stderr)
 
 		elif ch == '}' or ch == '\n':
 			return i, row
@@ -165,6 +165,6 @@ def parse_line(line,i):
 				if ch == ',':
 					i += 1
 				elif ch != '}':
-					print >> sys.stderr, 'syntax error:',line[i:]
+					print('syntax error:',line[i:], file=sys.stderr)
 
 	return i, row
