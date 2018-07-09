@@ -12,6 +12,10 @@ mv "ponies/Changeling (Lv2) #3" "ponies/Changeling (Lv2) 3"
 mv "ponies/Changeling (Lv2) #4" "ponies/Changeling (Lv2) 4"
 mv "ponies/Changeling (Lv2) #5" "ponies/Changeling (Lv2) 5"
 mv "ponies/Changeling (Lv2) #6" "ponies/Changeling (Lv2) 6"
+mv "ponies/Jeff Letrotski" "ponies/Dude"
+mv "ponies/PP Masked Matter-Horn" "ponies/PP Masked Matterhorn"
+mv "ponies/PP Mistress Mare-velous" "ponies/PP Mistress Marevelous"
+mv "ponies/Jasmine Leaf" "ponies/Tea Shop Pony"
 
 echo Repairing names
 ./scripts/repair_names.py ponies/
